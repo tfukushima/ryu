@@ -52,8 +52,8 @@ LOG = logging.getLogger('bgpspeaker.application')
 CONF = cfg.CONF
 
 CONF.register_opts([
-    cfg.IntOpt('bind-port', default=50002, help='rpc-port'),
-    cfg.StrOpt('bind-ip', default='0.0.0.0', help='rpc-bind-ip'),
+    cfg.IntOpt('bind_rpc_port', default=50002, help='rpc-port'),
+    cfg.StrOpt('bind_rpc_ip', default='0.0.0.0', help='rpc-bind-ip'),
     cfg.StrOpt('bgp-config-file', default=None,
                help='bgp-config-file')
 ])
@@ -69,8 +69,8 @@ class ApplicationException(BGPSException):
 
 class RyuBGPSpeaker(RyuApp):
     def __init__(self, *args, **kwargs):
-        self.bind_ip = RyuBGPSpeaker.validate_rpc_ip(CONF.bind_ip)
-        self.bind_port = RyuBGPSpeaker.validate_rpc_port(CONF.bind_port)
+        self.bind_ip = RyuBGPSpeaker.validate_rpc_ip(CONF.bind_rpc_ip)
+        self.bind_port = RyuBGPSpeaker.validate_rpc_port(CONF.bind_rpc_port)
         self.config_file = CONF.bgp_config_file
         super(RyuBGPSpeaker, self).__init__(*args, **kwargs)
 
